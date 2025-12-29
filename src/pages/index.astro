@@ -344,3 +344,74 @@ d.top=x+'px',d.left=y+'px'`&quot;bgcolor=#000><a href=https://github.com/rniii t
 		<p>🌸</p>
 	</div>
 </Layout>
+
+<!-- Ambient bottom layer (home page only) -->
+<div id="ambient-player">
+  <button id="ambient-toggle">▶</button>
+  <span id="ambient-time">loading…</span>
+  <audio id="ambient-audio" loop></audio>
+</div>
+
+<style>
+  #ambient-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    padding: 0.6rem 0.9rem;
+    background: rgba(16, 17, 22, 0.9);
+    backdrop-filter: blur(8px);
+
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text, #eaeaea);
+    z-index: 50;
+  }
+
+  #ambient-player button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  #ambient-time {
+    opacity: 0.8;
+  }
+</style>
+
+<script is:inline>
+  const startTime = Date.now();
+  const timeEl = document.getElementById("ambient-time");
+  const toggle = document.getElementById("ambient-toggle");
+  const audio = document.getElementById("ambient-audio");
+  
+    function format(ms) {
+      const s = Math.floor(ms / 1000);
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return `${d}d ${h}h ${m}m ${sec}s`;
+    }
+  
+    setInterval(() => {
+      timeEl.textContent = format(Date.now() - startTime);
+    }, 1000);
+  
+    toggle.onclick = () => {
+        if (audio.paused) {
+              audio.play();
+              toggle.textContent = "⏸";
+                  } else {
+                      audio.pause();
+                          toggle.textContent = "▶";
+                        }
+                      };
+</script>
