@@ -1,0 +1,69 @@
+---
+import AniList from "@assets/icons/brands/anilist.svg";
+import Codeberg from "@assets/icons/brands/codeberg.svg";
+import Discord from "@assets/icons/brands/discord.svg";
+import Github from "@assets/icons/brands/github.svg";
+import LastFm from "@assets/icons/brands/lastdotfm.svg";
+import MyAnimeList from "@assets/icons/brands/myanimelist.svg";
+import Osu from "@assets/icons/brands/osu.svg";
+import Steam from "@assets/icons/brands/steam.svg";
+import Twitter from "@assets/icons/brands/twitter.svg";
+import Card from "@components/card.astro";
+import Layout from "@layouts/Layout.astro";
+
+const links = [
+	{ href: "osu.ppy.sh/users/38439190", title: "osu!", icon: Osu },
+	{
+		href: "discord.com/users/1274066499786768416",
+		title: "Discord",
+		icon: Discord,
+	},
+	{ href: "github.com/fielstamper", title: "Github", icon: Github },
+	{ href: "codeberg.org/caitlyn", title: "Codeberg", icon: Codeberg },
+	{ href: "last.fm/user/lightafterruin", title: "Last.fm", icon: LastFm },
+
+	{ href: "anilist.co/user/aussieauntie", title: "AniList", icon: AniList },
+	{ href: "twitter.com/goodsoulsthrive", title: "Twitter", icon: Twitter },
+	{
+		href: "steamcommunity.com/profiles/76561198787864710",
+		title: "Steam",
+		icon: Steam,
+	},
+];
+---
+
+<Layout title="<mark>Find Me</mark>" subtitle="Check me out on other places">
+	<div>
+		{
+			links.map(({ href, title, icon: Icon }) => (
+				<Card
+					padding="0.4rem 1.4rem"
+					href={`https://${href}`}
+					title={title}
+					clickable
+					hoverable
+					draggable={false}
+				>
+					<Icon
+						width={30}
+						height={30}
+						fill="light-dark(black, white)"
+					/>
+				</Card>
+			))
+		}
+	</div>
+</Layout>
+<style>
+	div {
+		display: flex;
+		gap: 1rem;
+		margin: auto;
+		max-width: 520px;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.card {
+		display: flex;
+	}
+</style>
